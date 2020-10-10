@@ -4,6 +4,8 @@ import {
   DeleteOutlined,
   ExclamationCircleOutlined,
   PlusOutlined,
+  LoadingOutlined,
+  UploadOutlined,
 } from '@ant-design/icons';
 import {
   Descriptions,
@@ -23,6 +25,7 @@ import {
   Timeline,
   Collapse,
   Anchor,
+  Affix,
 } from 'antd';
 import moment from 'moment';
 import Head from 'next/head';
@@ -31,7 +34,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import CreateItem from '../../components/Item/CreateItem';
 import { STORIES } from '../../apis/stories';
-import styles from '../../components/Content/styles.module.css';
 import PageHeader from '../../components/PageHeader';
 import EditStory from '../../components/Story/EditStory';
 import { FIRESTORE_HELPER } from '../../components/Timestamp';
@@ -39,13 +41,15 @@ import User from '../../components/User';
 import Items from '../../components/Items';
 import AllStories from '../../components/Story/AllStories';
 import CreateStory from '../../components/Story/CreateStory';
+import styles from '../../components/Content/styles.module.css';
 
 const { Header, Content, Footer } = Layout;
 
 const Story = (props) => {
   const screens = Grid.useBreakpoint();
   const [data, setData] = useState();
-  const [itemsAnchor, setItemsAnchor] = useState([]);
+  const [sticky, setSticky] = useState(false);
+  const [activeItem, setActiveItem] = useState(['']);
   const [editing, setEditing] = useState(false);
   const [adding, setAdding] = useState(false);
   const router = useRouter();
@@ -95,90 +99,156 @@ const Story = (props) => {
       <Layout style={{ background: 'white' }}>
         <PageHeader />
 
-        <Content style={screens.md ? { width: 700, margin: '0 auto 400px' } : {}}>
+        <Content>
           <br />
           {data ? (
-            <Space size="large" direction="vertical">
-              <Row>
-                <Col flex={1}>
-                  <Typography.Title level={2} id={`${props.id}`}>
-                    {data.name}
-                  </Typography.Title>
-                </Col>
-                <Col>
-                  <Space>
-                    <Dropdown
-                      trigger="click"
-                      overlay={
-                        <Menu onClick={handleMenuClick}>
-                          <Menu.Item key="edit" icon={<EditOutlined />}>
-                            Edit
-                          </Menu.Item>
-                          <Menu.Item key="delete" icon={<DeleteOutlined />}>
-                            Delete
-                          </Menu.Item>
-                        </Menu>
-                      }
-                      placement="bottomRight"
-                    >
-                      <Button icon={<EllipsisOutlined />} />
-                    </Dropdown>
-                  </Space>
-                </Col>
-              </Row>
-
-              {!editing ? (
-                <Descriptions column={1}>
-                  {data.description && (
-                    <Descriptions.Item label="Description">
-                      <Typography.Paragraph
-                        ellipsis={{
-                          rows: 3,
-                          expandable: true,
-                          symbol: 'more',
-                        }}
-                      >
-                        {data.description}
-                      </Typography.Paragraph>
-                    </Descriptions.Item>
-                  )}
-                  <Descriptions.Item label="Created by">
+            <div>
+              <div style={screens.md ? { width: 700, margin: '0 auto' } : {}}>
+                <Row>
+                  <Col flex={1}>
+                    <Typography.Title level={2} id={`${props.id}`}>
+                      {data.name}
+                    </Typography.Title>
+                  </Col>
+                  <Col>
                     <Space>
-                      <User user={data.createdBy} />
-                      <Typography.Text type="secondary">
-                        {FIRESTORE_HELPER.timestampToFromNow(data.createdAt)}
-                      </Typography.Text>
+                      <Dropdown
+                        trigger="click"
+                        overlay={
+                          <Menu onClick={handleMenuClick}>
+                            <Menu.Item key="edit" icon={<EditOutlined />}>
+                              Edit
+                            </Menu.Item>
+                            <Menu.Item key="delete" icon={<DeleteOutlined />}>
+                              Delete
+                            </Menu.Item>
+                          </Menu>
+                        }
+                        placement="bottomRight"
+                      >
+                        <Button icon={<EllipsisOutlined />} />
+                      </Dropdown>
                     </Space>
-                  </Descriptions.Item>
-                  {data.lastModifiedBy && (
-                    <Descriptions.Item label="Last modified">
-                      <Space>
-                        <User user={data.lastModifiedBy} />
-                        <Typography.Text type="secondary">
-                          {FIRESTORE_HELPER.timestampToFromNow(
-                            data.lastModified,
-                          )}
-                        </Typography.Text>
-                      </Space>
-                    </Descriptions.Item>
+                  </Col>
+                </Row>
+              </div>
+              <Affix onChange={setSticky}>
+                {sticky && (
+                  <div className={styles.navbar}>
+                    <div
+                      style={
+                        screens.md
+                          ? {
+                              width: 700,
+                              margin: '0 auto 400px',
+                              padding: '8px 0',
+                            }
+                          : {
+                              padding: '8px 16px',
+                            }
+                      }
+                    >
+                      {activeItem ? (
+                        <div>
+                          <Row
+                            gutter={16}
+                            align="middle"
+                            style={{ flexWrap: 'nowrap' }}
+                          >
+                            <Col flex="auto">
+                              <Typography.Paragraph
+                                ellipsis={{
+                                  rows: 1,
+                                  expandable: false,
+                                }}
+                                title={`${moment(activeItem.date)
+                                  .local()
+                                  .format('DD/MM/YYYY')} - ${activeItem.title}`}
+                                style={{
+                                  marginBottom: 0,
+                                  maxWidth: screens.md ? 500 : '60vw',
+                                }}
+                              >
+                                {moment(activeItem.date)
+                                  .local()
+                                  .format('DD/MM/YYYY')}{' '}
+                                - {activeItem.title}
+                              </Typography.Paragraph>
+                            </Col>
+                            <Col>
+                              <Button size="small" icon={<UploadOutlined />}>
+                                Upload
+                              </Button>
+                            </Col>
+                          </Row>
+                        </div>
+                      ) : (
+                        data.name
+                      )}
+                    </div>
+                  </div>
+                )}
+              </Affix>
+              <div
+                style={screens.md ? { width: 700, margin: '0 auto 400px' } : {}}
+              >
+                <Space size="large" direction="vertical">
+                  {!editing ? (
+                    <Descriptions column={1}>
+                      {data.description && (
+                        <Descriptions.Item label="Description">
+                          <Typography.Paragraph
+                            ellipsis={{
+                              rows: 3,
+                              expandable: true,
+                              symbol: 'more',
+                            }}
+                          >
+                            {data.description}
+                          </Typography.Paragraph>
+                        </Descriptions.Item>
+                      )}
+                      <Descriptions.Item label="Created by">
+                        <Space>
+                          <User user={data.createdBy} />
+                          <Typography.Text type="secondary">
+                            {FIRESTORE_HELPER.timestampToFromNow(
+                              data.createdAt,
+                            )}
+                          </Typography.Text>
+                        </Space>
+                      </Descriptions.Item>
+                      {data.lastModifiedBy && (
+                        <Descriptions.Item label="Last modified">
+                          <Space>
+                            <User user={data.lastModifiedBy} />
+                            <Typography.Text type="secondary">
+                              {FIRESTORE_HELPER.timestampToFromNow(
+                                data.lastModified,
+                              )}
+                            </Typography.Text>
+                          </Space>
+                        </Descriptions.Item>
+                      )}
+                    </Descriptions>
+                  ) : (
+                    <EditStory
+                      id={props.id}
+                      data={data}
+                      onFinish={() => setEditing(false)}
+                    />
                   )}
-                </Descriptions>
-              ) : (
-                <EditStory
-                  id={props.id}
-                  data={data}
-                  onFinish={() => setEditing(false)}
-                />
-              )}
 
-              <Typography.Title level={3}>Timeline</Typography.Title>
+                  <Typography.Title level={3}>Timeline</Typography.Title>
 
-              <Items
-                storyName={data.name}
-                storyId={props.id}
-                setItemsAnchor={setItemsAnchor}
-              />
-            </Space>
+                  <Items
+                    storyName={data.name}
+                    storyId={props.id}
+                    setActiveItem={setActiveItem}
+                  />
+                </Space>
+              </div>
+            </div>
           ) : (
             <Card loading />
           )}

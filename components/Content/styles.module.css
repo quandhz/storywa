@@ -1,3 +1,24 @@
 .content {
   min-height: 280px;
 }
+
+.navbar {
+  width: 100%;
+  background: white;
+}
+
+.navbar:before {
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  content: '';
+  position: absolute;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 30, 66, 0.13) 0,
+    rgba(9, 30, 66, 0.13) 1px,
+    rgba(9, 30, 66, 0.08) 1px,
+    rgba(9, 30, 66, 0) 4px
+  );
+}

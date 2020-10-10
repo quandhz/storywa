@@ -70,7 +70,7 @@ const Component = (props) => {
     return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
   }
 
-  const anchors = data.reduce((accu, item) => {
+  const anchors = data.reduce((accu, item, index) => {
     if (!item.date && !item.time) {
       return accu;
     }
@@ -78,44 +78,62 @@ const Component = (props) => {
 
     if (accu.indexOf(date) !== -1) return accu;
 
-    return accu.concat({
-      key: date.format('DDMMYYYY'),
-      title: date.format('DD/MM/YYYY'),
-    });
+    return [
+      ...accu,
+      [date.format('DDMMYYYY'), date.format('DD/MM/YYYY'), index],
+    ];
   }, []);
 
   return (
     <div>
-      {screens.md && (
-        <div style={{ position: 'absolute', top: 80, right: 16 }}>
-          <Anchor offsetTop={16} activeLink={`#${props.storyId}`}>
-            <Anchor.Link
-              href={`#${props.storyId}`}
-              title={<b>{props.storyName}</b>}
-              activeLink={'#' + data[0].id}
-            >
-              {anchors.map((anchor) => {
-                return (
-                  <Anchor.Link
-                    key={anchor.key}
-                    href={`#${anchor.key}`}
-                    title={anchor.title}
-                  />
-                );
-              })}
-            </Anchor.Link>
-            <Anchor.Link
-              href="#AddItem"
-              title={
-                <Space>
-                  <PlusOutlined />
-                  Add Item
-                </Space>
+      <div
+        style={{
+          position: 'absolute',
+          top: 90,
+          right: 16,
+          visibility: !screens.md && 'hidden',
+        }}
+      >
+        <Anchor
+          offsetTop={60}
+          activeLink={`#${props.storyId}`}
+          onChange={(activeLink) => {
+            // scroll back top
+            if (activeLink === `#${props.storyId}`) {
+              return props.setActiveItem();
+            }
+            // scroll to items
+            for (let i = 0; i < anchors.length; i += 1) {
+              const [key, _, itemTitle] = anchors[i];
+
+              if (`#${key}` === activeLink) {
+                props.setActiveItem(data[i]);
+                break;
               }
-            />
-          </Anchor>
-        </div>
-      )}
+            }
+          }}
+        >
+          <Anchor.Link
+            href={`#${props.storyId}`}
+            title={<b>{props.storyName}</b>}
+          >
+            {anchors.map((item) => {
+              const [key, title] = item;
+
+              return <Anchor.Link key={key} href={`#${key}`} title={title} />;
+            })}
+          </Anchor.Link>
+          <Anchor.Link
+            href="#AddItem"
+            title={
+              <Space>
+                <PlusOutlined />
+                Add Item
+              </Space>
+            }
+          />
+        </Anchor>
+      </div>
 
       <Timeline>
         {data.map((item) => {

@@ -33,15 +33,9 @@ export default function PageHeader() {
       <Row gutter={16}>
         <Col flex={1}>
           {screens.md && (
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys="1">
               <Menu.Item key="1">
                 <Link href={'/'}>Home</Link>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Link href={'/stories'}>Story</Link>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Link href={'/posts'}>Posts</Link>
               </Menu.Item>
             </Menu>
           )}
