@@ -6,6 +6,7 @@ import {
   PlusOutlined,
   LoadingOutlined,
   UploadOutlined,
+  ToTopOutlined,
 } from '@ant-design/icons';
 import {
   Descriptions,
@@ -22,8 +23,7 @@ import {
   message,
   Space,
   Typography,
-  Timeline,
-  Collapse,
+  BackTop,
   Anchor,
   Affix,
 } from 'antd';
@@ -56,12 +56,9 @@ const Story = (props) => {
   const [targetOffset, setTargetOffset] = useState(0);
 
   useEffect(() => {
-    return (
-      props.id &&
-      STORIES.stream(props.id, (snapshot) => {
-        return setData(snapshot.data());
-      })
-    );
+    return STORIES.stream(props.id, (snapshot) => {
+      return setData(snapshot.data());
+    });
   }, [props.id]);
 
   const handleMenuClick = (e) => {
@@ -157,6 +154,7 @@ const Story = (props) => {
                           >
                             <Col flex="auto">
                               <Typography.Paragraph
+                                strong
                                 ellipsis={{
                                   rows: 1,
                                   expandable: false,
@@ -252,8 +250,12 @@ const Story = (props) => {
           ) : (
             <Card loading />
           )}
+
+          <BackTop>
+            <Button icon={<ToTopOutlined style={{ fontSize: 16 }} />} />
+          </BackTop>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
+        <Footer style={{ textAlign: 'center', padding: '12px 50px' }}>
           Story © 2020 Created by Jayc
         </Footer>
       </Layout>

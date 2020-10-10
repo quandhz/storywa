@@ -8,8 +8,9 @@ import {
   UploadOutlined,
 } from '@ant-design/icons';
 import firebase from 'firebase/app';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
+import { STORIES } from '../../../apis/stories';
 import { useUser } from '../../../utils/auth/useUser';
 import User from '../../../components/User';
 import { FIRESTORE_HELPER } from '../../Timestamp';

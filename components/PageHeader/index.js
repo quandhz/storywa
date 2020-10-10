@@ -29,8 +29,11 @@ export default function PageHeader() {
   }
 
   return (
-    <Header>
+    <Header style={{ background: '#0f222d' }}>
       <Row gutter={16}>
+        <Col>
+          <img src="/logo.png" height={60} />
+        </Col>
         <Col flex={1}>
           {screens.md && (
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys="1">

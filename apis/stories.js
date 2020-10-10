@@ -53,7 +53,7 @@ export const streamAll = (observer) => {
 };
 
 export const stream = (id, observer) => {
-  return db.collection(STORIES_COLLECTION_NAME).doc(id).onSnapshot(observer);
+  return id && db.collection(STORIES_COLLECTION_NAME).doc(id).onSnapshot(observer);
 };
 
 export const STORIES = {
