@@ -18,7 +18,6 @@ import { useUser } from '../../utils/auth/useUser';
 
 const Component = (props) => {
   const { user, logout } = useUser();
-  console.log('CreateItem props', props);
 
   const handleFinish = async ({ date, ...data }) => {
     console.log('handleFinish data, user', data, user);
