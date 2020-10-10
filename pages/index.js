@@ -1,20 +1,39 @@
-import useSWR from 'swr'
-import Link from 'next/link'
-import { useUser } from '../utils/auth/useUser'
+import {
+  Avatar,
+  Breadcrumb,
+  Button,
+  Col,
+  Layout,
+  Menu,
+  Row,
+  Space,
+  Grid,
+  Popover,
+} from 'antd';
+import PageHeader from '../components/PageHeader';
+
+import Link from 'next/link';
+import Head from 'next/head';
+import useSWR from 'swr';
+import CreatePost from '../components/CreatePost';
+import { useUser } from '../utils/auth/useUser';
+import { LogoutOutlined } from '@ant-design/icons';
+
+import styles from '../components/Content/styles.module.css';
+
+const { Header, Content, Footer } = Layout;
 
 const fetcher = (url, token) =>
   fetch(url, {
     method: 'GET',
     headers: new Headers({ 'Content-Type': 'application/json', token }),
     credentials: 'same-origin',
-  }).then((res) => res.json())
+  }).then((res) => res.json());
 
 const Index = () => {
-  const { user, logout } = useUser()
-  const { data, error } = useSWR(
-    user ? ['/api/getFood', user.token] : null,
-    fetcher
-  )
+  const { user, logout } = useUser();
+  const screens = Grid.useBreakpoint();
+
   if (!user) {
     return (
       <>
@@ -26,38 +45,33 @@ const Index = () => {
           </Link>
         </p>
       </>
-    )
+    );
   }
 
   return (
     <div>
-      <div>
-        <p>You're signed in. Email: {user.email}</p>
-        <p
-          style={{
-            display: 'inline-block',
-            color: 'blue',
-            textDecoration: 'underline',
-            cursor: 'pointer',
-          }}
-          onClick={() => logout()}
-        >
-          Log out
-        </p>
-      </div>
-      <div>
-        <Link href={'/example'}>
-          <a>Another example page</a>
-        </Link>
-      </div>
-      {error && <div>Failed to fetch food!</div>}
-      {data && !error ? (
-        <div>Your favorite food is {data.food}.</div>
-      ) : (
-        <div>Loading...</div>
-      )}
-    </div>
-  )
-}
+      <Head>
+        <title>Jayc Story</title>
+      </Head>
+      <Layout className="layout">
+        <PageHeader />
 
-export default Index
+        <Content style={screens.md ? { width: 700, margin: '0 auto' } : {}}>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Story</Breadcrumb.Item>
+          </Breadcrumb>
+
+          <div className={styles.content}>
+            <CreatePost />
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Story © 2020 Created by Jayc
+        </Footer>
+      </Layout>
+    </div>
+  );
+};
+
+export default Index;

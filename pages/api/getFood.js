@@ -6,10 +6,12 @@ const getFood = async (req, res) => {
 
   try {
     await verifyIdToken(token)
+
     return res.status(200).json({
       food: favoriteFoods[Math.floor(Math.random() * favoriteFoods.length)],
     })
   } catch (error) {
+    console.log('error', error);
     return res.status(401).send('You are unauthorised')
   }
 }

@@ -1,0 +1,46 @@
+[debug] [2020-10-10T02:04:58.916Z] ----------------------------------------------------------------------
+[debug] [2020-10-10T02:04:58.918Z] Command:       /usr/local/bin/node /Users/quando/.npm-global/bin/firebase init hosting:github
+[debug] [2020-10-10T02:04:58.918Z] CLI Version:   8.12.0
+[debug] [2020-10-10T02:04:58.918Z] Platform:      darwin
+[debug] [2020-10-10T02:04:58.918Z] Node Version:  v12.18.4
+[debug] [2020-10-10T02:04:58.919Z] Time:          Sat Oct 10 2020 13:04:58 GMT+1100 (Australian Eastern Daylight Time)
+[debug] [2020-10-10T02:04:58.919Z] ----------------------------------------------------------------------
+[debug] [2020-10-10T02:04:58.919Z] 
+[debug] [2020-10-10T02:04:58.923Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-10-10T02:04:58.923Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/quando/Work/storywa
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using story-f2fba. 
+[debug] [2020-10-10T02:04:58.931Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/story-f2fba  
+ 
+[debug] [2020-10-10T02:04:59.493Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 10 Oct 2020 02:04:59 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+=== Hosting:github Setup
+[info] 
+[info] i  Detected a .git folder at /Users/quando/Work/storywa 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=78321054&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
