@@ -5,6 +5,7 @@ import {
   PlusOutlined,
   LoadingOutlined,
   UploadOutlined,
+  InboxOutlined,
 } from '@ant-design/icons';
 import {
   Button,
@@ -26,6 +27,7 @@ import {
   DatePicker,
   TimePicker,
   Grid,
+  Card,
 } from 'antd';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
@@ -67,7 +69,58 @@ const Component = (props) => {
   if (!data) return null;
 
   if (!data.length) {
-    return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+    return (
+      <Upload.Dragger
+        {...props}
+        listType="picture-card"
+        multiple
+        beforeUpload={() => false}
+        showUploadList={false}
+        onChange={({ fileList: fl }) => {
+          return setFileList(
+            fl.map((file) => {
+              return {
+                ...file,
+                previewURL: URL.createObjectURL(file.originFileObj),
+              };
+            }),
+          );
+        }}
+      >
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description={
+            <Typography.Text type="secondary">No Data</Typography.Text>
+          }
+        />
+
+        <Space direction="vertical">
+          <Typography.Text>Click or drag file(s) to this area</Typography.Text>
+          <Typography.Text type="secondary">
+            Support a single file or bulk upload
+          </Typography.Text>
+        </Space>
+      </Upload.Dragger>
+    );
+  }
+  if (!data.length) {
+    return (
+      <Card>
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description={
+            <span>
+              <Typography.Text type="secondary">No Data</Typography.Text>
+              <br />
+              <br />
+              <Button icon={<PlusOutlined />} type="primary">
+                File
+              </Button>
+            </span>
+          }
+        />
+      </Card>
+    );
   }
 
   const anchors = data.reduce((accu, item, index) => {

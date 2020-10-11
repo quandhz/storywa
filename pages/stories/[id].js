@@ -230,11 +230,11 @@ const Story = (props) => {
 
                   <People storyId={props.id} />
 
-                  {/*<Items*/}
-                  {/*  storyName={data.name}*/}
-                  {/*  storyId={props.id}*/}
-                  {/*  setActiveItem={setActiveItem}*/}
-                  {/*/>*/}
+                  <Items
+                    storyName={data.name}
+                    storyId={props.id}
+                    setActiveItem={setActiveItem}
+                  />
                 </Space>
               </div>
             </div>
