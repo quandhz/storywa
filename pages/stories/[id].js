@@ -35,12 +35,13 @@ import { useEffect, useState } from 'react';
 import CreateItem from '../../components/Item/CreateItem';
 import { STORIES } from '../../apis/stories';
 import PageHeader from '../../components/PageHeader';
+import People from '../../components/People';
 import EditStory from '../../components/Story/EditStory';
 import { FIRESTORE_HELPER } from '../../components/Timestamp';
 import User from '../../components/User';
 import Items from '../../components/Items';
 import AllStories from '../../components/Story/AllStories';
-import CreateStory from '../../components/Story/CreateStory';
+import AddStory from '../../components/Story/AddStory';
 import styles from '../../components/Content/styles.module.css';
 
 const { Header, Content, Footer } = Layout;
@@ -76,11 +77,15 @@ const Story = (props) => {
         okType: 'danger',
         cancelText: 'Cancel',
         onOk() {
-          STORIES.delete(props.id).then(() => {
-            message.success('Story deleted successfully');
+          STORIES.delete(props.id)
+            .then(() => {
+              message.success('Story deleted successfully');
 
-            router.push('/stories');
-          });
+              router.push('/');
+            })
+            .catch((e) => {
+              message.error(e);
+            });
         },
       });
     }
@@ -89,11 +94,9 @@ const Story = (props) => {
   return (
     <div>
       <Head>
-        <title>
-          {data ? `${data.name} - ${data.createdBy.name}` : 'Story'}
-        </title>
+        <title>{data ? `${data.name}` : 'Story'}</title>
       </Head>
-      <Layout style={{ background: 'white' }}>
+      <Layout>
         <PageHeader />
 
         <Content>
@@ -194,28 +197,16 @@ const Story = (props) => {
                   {!editing ? (
                     <Descriptions column={1}>
                       {data.description && (
-                        <Descriptions.Item label="Description">
-                          <Typography.Paragraph
-                            ellipsis={{
-                              rows: 3,
-                              expandable: true,
-                              symbol: 'more',
-                            }}
-                          >
-                            {data.description}
-                          </Typography.Paragraph>
-                        </Descriptions.Item>
+                        <Typography.Paragraph
+                          ellipsis={{
+                            rows: 3,
+                            expandable: true,
+                            symbol: 'more',
+                          }}
+                        >
+                          {data.description}
+                        </Typography.Paragraph>
                       )}
-                      <Descriptions.Item label="Created by">
-                        <Space>
-                          <User user={data.createdBy} />
-                          <Typography.Text type="secondary">
-                            {FIRESTORE_HELPER.timestampToFromNow(
-                              data.createdAt,
-                            )}
-                          </Typography.Text>
-                        </Space>
-                      </Descriptions.Item>
                       {data.lastModifiedBy && (
                         <Descriptions.Item label="Last modified">
                           <Space>
@@ -237,18 +228,20 @@ const Story = (props) => {
                     />
                   )}
 
-                  <Typography.Title level={3}>Timeline</Typography.Title>
+                  <People storyId={props.id} />
 
-                  <Items
-                    storyName={data.name}
-                    storyId={props.id}
-                    setActiveItem={setActiveItem}
-                  />
+                  {/*<Items*/}
+                  {/*  storyName={data.name}*/}
+                  {/*  storyId={props.id}*/}
+                  {/*  setActiveItem={setActiveItem}*/}
+                  {/*/>*/}
                 </Space>
               </div>
             </div>
           ) : (
-            <Card loading />
+            <div style={screens.md ? { width: 700, margin: '0 auto' } : {}}>
+              <Card loading />
+            </div>
           )}
 
           <BackTop>

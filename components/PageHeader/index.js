@@ -30,18 +30,11 @@ export default function PageHeader() {
 
   return (
     <Header style={{ background: '#0f222d' }}>
-      <Row gutter={16}>
+      <Row gutter={16} justify="space-between">
         <Col>
-          <img src="/logo.png" height={60} />
-        </Col>
-        <Col flex={1}>
-          {screens.md && (
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys="1">
-              <Menu.Item key="1">
-                <Link href={'/'}>Home</Link>
-              </Menu.Item>
-            </Menu>
-          )}
+          <Link href="/">
+            <img src="/logo.png" height={60} />
+          </Link>
         </Col>
         <Col>
           <Dropdown
@@ -63,7 +56,7 @@ export default function PageHeader() {
             <Button type="text">
               {user.displayName ? (
                 <Space>
-                  <Avatar src={user.photoURL} />
+                  <Avatar src={user.photoURL} size="small" />
                   {screens.md && (
                     <div style={{ color: 'white' }}>{user.displayName}</div>
                   )}

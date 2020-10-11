@@ -4,21 +4,14 @@ import 'firebase/firestore';
 export const STORIES_COLLECTION_NAME = 'stories';
 const db = firebase.firestore();
 
-const create = (data, user) => {
+const create = (data) => {
   const now = firebase.firestore.FieldValue.serverTimestamp();
 
   const payload = {
     ...data,
     createdAt: now,
     lastModified: now,
-    createdBy: {
-      uid: user.id,
-      name: user.displayName,
-      photoURL: user.photoURL,
-    },
   };
-
-  console.log('create payload', payload);
 
   return db.collection(STORIES_COLLECTION_NAME).add(payload);
 };
@@ -36,9 +29,10 @@ const update = (id, data, user) => {
     },
   };
 
-  console.log('update payload', payload);
-
-  return db.collection(STORIES_COLLECTION_NAME).doc(id).set(payload, { merge: true });
+  return db
+    .collection(STORIES_COLLECTION_NAME)
+    .doc(id)
+    .set(payload, { merge: true });
 };
 
 const deleteStory = (id) => {
@@ -48,12 +42,15 @@ const deleteStory = (id) => {
 export const streamAll = (observer) => {
   return db
     .collection(STORIES_COLLECTION_NAME)
-    .orderBy('createdAt')
+    .orderBy('createdAt', 'desc')
+    .limit(20)
     .onSnapshot(observer);
 };
 
 export const stream = (id, observer) => {
-  return id && db.collection(STORIES_COLLECTION_NAME).doc(id).onSnapshot(observer);
+  return (
+    id && db.collection(STORIES_COLLECTION_NAME).doc(id).onSnapshot(observer)
+  );
 };
 
 export const STORIES = {

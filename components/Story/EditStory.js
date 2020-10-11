@@ -18,11 +18,14 @@ const Component = (props) => {
   const handleFinish = async (data) => {
     console.log('handleFinish data, user', data, user);
 
-    return STORIES.update(props.id, data, user).then(() => {
-      message.success('Story updated successfully');
-
-      props.onFinish();
-    });
+    return STORIES.update(props.id, data, user)
+      .then(() => {
+        message.success('Story updated successfully');
+        props.onFinish();
+      })
+      .catch((e) => {
+        message.error('error');
+      });
   };
 
   const layout = {

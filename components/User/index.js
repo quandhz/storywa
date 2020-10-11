@@ -6,7 +6,7 @@ const Component = (props) => {
   return (
     <Space size={4} align="center">
       <Avatar size={20} src={props.user.photoURL} />
-      <div>{props.user.name}</div>
+      <div>{props.user.displayName}</div>
     </Space>
   );
 };
