@@ -267,7 +267,7 @@ const Index = () => {
                 </Typography.Title>
                 <br />
                 <Typography.Text strong>
-                  Melbourne, 20 October 2019
+                  20 October 2019
                 </Typography.Text>
                 <Typography.Paragraph>
                   Chau and I really liked each other at the time. Even though I

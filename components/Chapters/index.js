@@ -1,7 +1,15 @@
-import { PlusOutlined } from '@ant-design/icons';
+import {
+  PlusOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  ArrowUpOutlined,
+  ArrowDownOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
 import {
   Button,
   Card,
+  Space,
   Col,
   Empty,
   Form,
@@ -12,6 +20,7 @@ import {
 } from 'antd';
 import firebase from 'firebase';
 import 'firebase/firestore';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { ITEMS } from '../../apis/items';
 import { STORIES } from '../../apis/stories';
@@ -36,6 +45,7 @@ const Chapters = () => {
       createdAt: now,
       lastModified: now,
       id: now,
+      paragraphs: [],
     };
 
     return STORIES.setChapter(STORY_ID, data.chapters.concat(payload)).then(
@@ -45,6 +55,52 @@ const Chapters = () => {
       },
     );
   };
+
+  const handleAddParagraph = (chapterId) => () => {
+    const now = Date.now();
+    const content = prompt('Enter paragraph');
+
+    const payload = {
+      content,
+      createdAt: now,
+      id: now,
+    };
+
+    return STORIES.setChapter(
+      STORY_ID,
+      data.chapters.map((chapter) => {
+        if (chapter.id === chapterId) {
+          return {
+            ...chapter,
+            paragraphs: chapter.paragraphs
+              ? chapter.paragraphs.concat(payload)
+              : [payload],
+          };
+        }
+
+        return chapter;
+      }),
+    ).then(() => {
+      message.success('Paragraph created successfully');
+    });
+  };
+
+  const deleteParagraph = (chapterId, id) => () => {
+    return STORIES.setChapter(
+      STORY_ID,
+      data.chapters.map((chapter) => {
+        if (chapter.id !== chapterId) return chapter;
+
+        return {
+          ...chapter,
+          paragraphs: chapter.paragraphs.filter((p) => p.id !== id),
+        };
+      }),
+    ).then(() => {
+      message.success('Chapter deleted successfully');
+    });
+  };
+
   const deleteChapter = (id) => () => {
     return STORIES.setChapter(
       STORY_ID,
@@ -52,6 +108,11 @@ const Chapters = () => {
     ).then(() => {
       message.success('Chapter deleted successfully');
     });
+  };
+
+  const editChapter = (id) => () => {
+    console.log('editChapter', id);
+    return null;
   };
 
   if (!data)
@@ -85,7 +146,34 @@ const Chapters = () => {
             <>
               <Row key={chapter.id} justify="center">
                 <Col style={{ width: 500 }}>
-                  <Card>
+                  <Card
+                    actions={[
+                      <Button
+                        type="text"
+                        icon={<PlusOutlined />}
+                        onClick={handleAddParagraph(chapter.id)}
+                      >
+                        Paragraph
+                      </Button>,
+                      <Space>
+                        <Button
+                          disabled={index === chapters.length - 1}
+                          type="text"
+                          icon={<ArrowDownOutlined />}
+                        />
+                        <Button
+                          disabled={index === 0}
+                          type="text"
+                          icon={<ArrowUpOutlined />}
+                        />
+                      </Space>,
+                      <Button
+                        type="text"
+                        onClick={deleteChapter(chapter.id)}
+                        icon={<DeleteOutlined />}
+                      />,
+                    ]}
+                  >
                     <Typography.Text
                       style={{ fontFamily: "'Dancing Script', cursive" }}
                     >
@@ -98,9 +186,30 @@ const Chapters = () => {
                     >
                       {chapter.name}
                     </Typography.Title>
-                    <Button type="link" onClick={deleteChapter(chapter.id)}>
-                      Delete
-                    </Button>
+
+                    {chapter.paragraphs &&
+                      chapter.paragraphs.map((p, index) => {
+                        return (
+                          <>
+                            {!!index && <br />}
+                            <Space>
+                              <Typography.Text strong>
+                                {moment(p).format('D MMM YYYY')}
+                              </Typography.Text>
+
+                              <Button
+                                type="link"
+                                onClick={deleteParagraph(chapter.id, p.id)}
+                              >
+                                Delete
+                              </Button>
+                            </Space>
+                            <Typography.Paragraph>
+                              {p.content}
+                            </Typography.Paragraph>
+                          </>
+                        );
+                      })}
                   </Card>
                 </Col>
               </Row>
