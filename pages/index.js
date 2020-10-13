@@ -46,7 +46,6 @@ function getReadableFileSizeString(fileSizeInBytes) {
 }
 
 const Index = () => {
-  const { user, logout } = useUser();
   const [collapsed, setCollapsed] = useState([]);
   const [adding, setAdding] = useState(false);
   const [previewVisible, setPreviewVisible] = useState(false);
