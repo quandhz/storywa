@@ -162,9 +162,9 @@ const Index = () => {
                 Quan Do Hong
               </Typography.Text>
               <br />
-              <Typography.Text>Birthday: 05 - 10 - 1991</Typography.Text>
+              <Typography.Text>05 - 10 - 1991</Typography.Text>
               <br />
-              <Typography.Text type="secondary">Nickname: Jayc</Typography.Text>
+              <Typography.Text type="secondary">Jayc</Typography.Text>
             </Col>
           </Row>
 
