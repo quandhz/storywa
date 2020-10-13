@@ -115,7 +115,7 @@ const Index = () => {
               >
                 Applicant
               </Typography.Title>
-              <Avatar size={screens.md ? 150 : 100} src="photos/juliet.jpg" />
+              <Avatar size={screens.md ? 150 : 140} src="photos/juliet.jpg" />
               <br />
               <Typography.Text
                 strong
@@ -137,8 +137,8 @@ const Index = () => {
                 style={{
                   fontSize: 24,
                   color: 'red',
-                  marginTop: 85,
-                  padding: 8,
+                  marginTop: 100,
+                  padding: '0 16px 0 12px',
                 }}
               />
             </Col>
@@ -149,7 +149,7 @@ const Index = () => {
               >
                 Sponsor
               </Typography.Title>
-              <Avatar size={screens.md ? 150 : 100} src="photos/jayc.jpg" />
+              <Avatar size={screens.md ? 150 : 140} src="photos/jayc.jpg" />
               <br />
               <Typography.Text
                 strong
