@@ -4,6 +4,7 @@ import {
   UploadOutlined,
   StarOutlined,
   HeartOutlined,
+  FacebookOutlined,
   HeartFilled,
 } from '@ant-design/icons';
 import {
@@ -135,7 +136,13 @@ const Index = () => {
               <br />
               <Typography.Text>20 - 09 - 1999</Typography.Text>
               <br />
-              <Typography.Text type="secondary">@Juliet</Typography.Text>
+              <Typography.Text type="secondary">
+                <FacebookOutlined /> Quỳnhh Châuu
+              </Typography.Text>
+              <br />
+              <Typography.Text type="secondary">
+                Nickname: Juliet
+              </Typography.Text>
             </Col>
             <Col>
               <HeartFilled
@@ -169,7 +176,11 @@ const Index = () => {
               <br />
               <Typography.Text>05 - 10 - 1991</Typography.Text>
               <br />
-              <Typography.Text type="secondary">@Jayc</Typography.Text>
+              <Typography.Text type="secondary">
+                <FacebookOutlined /> Quan Dhz
+              </Typography.Text>
+              <br />
+              <Typography.Text type="secondary">Nickname: Jayc</Typography.Text>
             </Col>
           </Row>
 
@@ -246,83 +257,8 @@ const Index = () => {
           <br />
 
           <Chapters />
-          <br />
 
-          <Row justify="center">
-            <Col style={{ width: 500 }}>
-              <Card>
-                <Typography.Text
-                  style={{ fontFamily: "'Dancing Script', cursive" }}
-                >
-                  CHAPTER
-                  <br />
-                  ONE
-                </Typography.Text>
-                <br />
-                <Typography.Title
-                  level={4}
-                  style={{ fontFamily: "'Piedra', cursive" }}
-                >
-                  Our story begins
-                </Typography.Title>
-                <br />
-                <Typography.Text strong>
-                  20 October 2019
-                </Typography.Text>
-                <Typography.Paragraph>
-                  Chau and I really liked each other at the time. Even though I
-                  already planned to go back Vietnam in middle January 2020 (in
-                  one and a half month) for Lunar New Year, I couldn’t wait
-                  anymore. So I took one week off work and traveled to Vietnam
-                  to be with Chau.
-                </Typography.Paragraph>
-                <Typography.Paragraph>
-                  I searched for the earliest flight available. It was Thursday
-                  night when I booked my flight to Hanoi, and it departed
-                  mid-night the next day (1am Saturday 23/11). The decision was
-                  made somewhat quick, but I’m so glad I did that.
-                </Typography.Paragraph>
-              </Card>
-            </Col>
-          </Row>
           <br />
-          <Row justify="center">
-            <Col style={{ width: 500 }}>
-              <Card>
-                <Typography.Text
-                  style={{ fontFamily: "'Dancing Script', cursive" }}
-                >
-                  CHAPTER
-                  <br />
-                  TWO
-                </Typography.Text>
-                <br />
-                <Typography.Title
-                  level={4}
-                  style={{ fontFamily: "'Piedra', cursive" }}
-                >
-                  We met for the first time
-                </Typography.Title>
-                <br />
-                <Typography.Text strong>
-                  Hanoi, 23 November 2019
-                </Typography.Text>
-                <Typography.Paragraph>
-                  As soon as I arrived Hanoi, I picked up the rental car, then
-                  went to pick Chau up at her home. In the whole next 9 days 8
-                  nights, we never leave each other’s sight.
-                </Typography.Paragraph>
-                <Typography.Paragraph>
-                  We stayed in Hanoi that night, so I could take some rest, and
-                  we had some time to get know each other more. Chau was a bit
-                  shy at first, after all, it was the first time we met in
-                  person. But it didn’t take long, we had so much things in
-                  common. It felt like we already knew each other for so long
-                  and we were born to love and be loved by each other.
-                </Typography.Paragraph>
-              </Card>
-            </Col>
-          </Row>
           <br />
           <Card>To be continued..</Card>
         </Content>

@@ -18,6 +18,8 @@ import {
   Row,
   Typography,
 } from 'antd';
+import Jayc from '../User/Jayc';
+import Juliet from '../User/Juliet';
 import firebase from 'firebase';
 import 'firebase/firestore';
 import moment from 'moment';
@@ -204,6 +206,9 @@ const Chapters = () => {
                                 Delete
                               </Button>
                             </Space>
+                            <br />
+                            {index % 2 ? <Jayc /> : <Juliet />}
+                            <br />
                             <Typography.Paragraph>
                               {p.content}
                             </Typography.Paragraph>
