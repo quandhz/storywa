@@ -245,11 +245,13 @@ const Index = () => {
           </Row>
           <br />
 
+          <Chapters />
+          <br />
+
           <Row justify="center">
             <Col style={{ width: 500 }}>
               <Card>
                 <Typography.Text
-                  size={32}
                   style={{ fontFamily: "'Dancing Script', cursive" }}
                 >
                   CHAPTER
