@@ -2,18 +2,26 @@ import {
   DeleteOutlined,
   FileOutlined,
   UploadOutlined,
+  StarOutlined,
+  HeartOutlined,
+  HeartFilled,
 } from '@ant-design/icons';
 import {
   Button,
   Col,
   Divider,
+  Image,
+  Timeline,
   Grid,
   Layout,
   Popover,
+  Card,
   Row,
   Space,
   Typography,
   Upload,
+  Avatar,
+  Anchor,
 } from 'antd';
 import Head from 'next/head';
 
@@ -45,202 +53,258 @@ const Index = () => {
   const [fileList, setFileList] = useState([]);
   const screens = Grid.useBreakpoint();
 
-  if (!user) {
-    return (
-      <>
-        <p>Hi there!</p>
-        <p>
-          You are not signed in.{' '}
-          <Link href={'/auth'}>
-            <a>Sign in</a>
-          </Link>
-        </p>
-      </>
-    );
-  }
-
   const siderWidth = 0;
 
   return (
     <div>
       <Head>
         <title>Jayc Stories</title>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Molle:ital@1&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Piedra&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
       <Layout style={{ minHeight: '100vh' }}>
-        <Layout style={{ marginRight: siderWidth }}>
-          <PageHeader />
+        <div
+          style={{
+            background:
+              'linear-gradient(0deg, rgba(255,255,255,1) 35%, rgba(239,246,255,1) 72%, rgba(216,234,255,1) 100%)',
+            borderBottom: '1px solid #e0e0e1',
+            minHeight: 300,
+            paddingTop: 48,
+          }}
+        >
+          {/*<Row justify="center">*/}
+          {/*  <Col>*/}
+          {/*    <Image width={500} src="/photos/cover.jpeg" />*/}
+          {/*  </Col>*/}
+          {/*</Row>*/}
+          {/*<br />*/}
+          <Row justify="center">
+            <Col>
+              <Typography.Title
+                level={1}
+                style={{ fontFamily: "'Molle', cursive" }}
+              >
+                Our Love Story
+              </Typography.Title>
+            </Col>
+          </Row>
+          <Row justify="center" style={{ marginTop: -8 }}>
+            <Col>
+              <Typography.Text type="secondary">
+                Since October 2019
+              </Typography.Text>
+            </Col>
+          </Row>
+          <br />
+          <br />
+          <Row justify="center" style={{ textAlign: 'center' }}>
+            <Col>
+              <Typography.Title
+                level={4}
+                style={{ fontFamily: "'Piedra', cursive" }}
+              >
+                Applicant
+              </Typography.Title>
+              <Avatar size={150} src="photos/juliet.jpg" />
+              <Typography.Title
+                level={5}
+                style={{
+                  marginTop: 8,
+                  marginBottom: 4,
+                  fontFamily: "'Piedra', cursive",
+                }}
+              >
+                Chau Thi Quynh Nguyen
+              </Typography.Title>
+              <Typography.Text>Birthday: 20 - 09 - 1999</Typography.Text>
+              <br />
+              <Typography.Text type="secondary">
+                Nickname: Juliet
+              </Typography.Text>
+            </Col>
+            <Col flex="128px">
+              <HeartFilled
+                style={{ fontSize: 24, color: 'red', marginTop: 85 }}
+              />
+            </Col>
+            <Col>
+              <Typography.Title
+                level={4}
+                style={{ fontFamily: "'Piedra', cursive" }}
+              >
+                Sponsor
+              </Typography.Title>
+              <Avatar size={150} src="photos/jayc.jpg" />
+              <Typography.Title
+                level={5}
+                style={{
+                  marginTop: 8,
+                  marginBottom: 4,
+                  fontFamily: "'Piedra', cursive",
+                }}
+              >
+                Quan Do Hong
+              </Typography.Title>
+              <Typography.Text>Birthday: 05 - 10 - 1991</Typography.Text>
+              <br />
+              <Typography.Text type="secondary">Nickname: Jayc</Typography.Text>
+            </Col>
+          </Row>
 
-          <Content
-            style={
-              screens.md ? { width: 700, margin: '0 auto', paddingTop: 36 } : {}
-            }
-          >
-            <Stories />
-          </Content>
+          <br />
+          <Row justify="center">
+            <Col style={{ width: 450 }}>
+              <Divider>
+                <Typography.Text
+                  strong
+                  style={{ fontFamily: "'Piedra', cursive" }}
+                >
+                  Major Milestones
+                </Typography.Text>
+              </Divider>
+            </Col>
+          </Row>
+          <br />
+          <Row justify="center">
+            <Col flex="500px">
+              <Timeline mode="left">
+                <Timeline.Item label="20 - 10 - 2019">
+                  Our story begins
+                </Timeline.Item>
+                <Timeline.Item label="23 - 11 - 2019">
+                  We met for the first time
+                </Timeline.Item>
+                <Timeline.Item label="11 - 02 - 2020">
+                  He proposed, I said yes
+                </Timeline.Item>
+                <Timeline.Item label="24 - 12 - 2020">
+                  The best day
+                </Timeline.Item>
+              </Timeline>
+            </Col>
+          </Row>
+        </div>
+        <Content
+          style={{
+            background: '#f6f8fa',
+            minHeight: '80vh',
+            position: 'relative',
+          }}
+        >
+          <div style={{ position: 'absolute', top: 16, right: 16 }}>
+            <Anchor style={{ background: 'unset' }}>
+              <Anchor.Link
+                href="#components-anchor-demo-basic"
+                title="Basic demo"
+              />
+              <Anchor.Link
+                href="#components-anchor-demo-static"
+                title="Static demo"
+              />
+              <Anchor.Link href="#API" title="API">
+                <Anchor.Link href="#Anchor-Props" title="Anchor Props" />
+                <Anchor.Link href="#Link-Props" title="Link Props" />
+              </Anchor.Link>
+            </Anchor>
+          </div>
+          <br />
+          <Row justify="center">
+            <Col style={{ maxWidth: 500 }}>
+              <Typography.Title
+                level={4}
+                style={{ fontFamily: "'Piedra', cursive" }}
+              >
+                Development of Relationship
+              </Typography.Title>
+            </Col>
+          </Row>
+          <br />
 
-          <PageFooter />
-        </Layout>
-
-        {false && (
-          <Sider
-            theme="light"
-            width={136}
-            style={{
-              overflow: 'auto',
-              height: '100vh',
-              position: 'fixed',
-              right: previewVisible ? 300 : 0,
-              boxShadow: '-1px 0 2px 1px #8a8a8a5e',
-            }}
-          />
-        )}
-        {false && (
-          <Sider
-            theme="light"
-            width={siderWidth}
-            style={{
-              overflow: 'auto',
-              height: '100vh',
-              position: 'fixed',
-              right: 0,
-              boxShadow: '-1px 0 2px 1px #8a8a8a5e',
-            }}
-          >
-            <div
-              style={{
-                position: 'fixed',
-                top: 0,
-                width: collapsed ? siderWidth : 300,
-                background: 'white',
-                padding: '8px ' + collapsed ? '8px' : '16px',
-                zIndex: 1,
-                boxShadow: '0 1px 1px 0 #8a8a8a5e',
-              }}
-            >
-              <Row>
-                <Col flex={1}>
-                  <Upload
-                    multiple
-                    listType="picture"
-                    beforeUpload={() => false}
-                    showUploadList={false}
-                    onChange={({ fileList: fl }) => {
-                      return setFileList(
-                        fl.map((file) => {
-                          return {
-                            ...file,
-                            previewURL: URL.createObjectURL(file.originFileObj),
-                          };
-                        }),
-                      );
-                    }}
-                  >
-                    <Button icon={<UploadOutlined />}>
-                      {!collapsed && 'Select Files'}
-                    </Button>
-                  </Upload>
-                </Col>
-                <Col>
-                  <Button
-                    onClick={() => setFileList([])}
-                    icon={<DeleteOutlined />}
-                  >
-                    {!collapsed && 'Clear'}
-                  </Button>
-                </Col>
-              </Row>
-            </div>
-
-            <div
-              style={{
-                padding: collapsed ? 8 : 16,
-                marginTop: 48,
-                marginBottom: 48,
-              }}
-            >
-              <Space direction="vertical">
-                {fileList.map((file) => {
-                  return (
-                    <div key={file.uid}>
-                      {file.type.indexOf('image') !== -1 ? (
-                        <Popover
-                          placement="left"
-                          title={file.name}
-                          content={
-                            <img style={{ width: 300 }} src={file.previewURL} />
-                          }
-                          trigger="hover"
-                        >
-                          <img
-                            style={{ width: '100%' }}
-                            src={file.previewURL}
-                          />
-                        </Popover>
-                      ) : (
-                        <div
-                          style={{
-                            background: 'gainsboro',
-                            width: '100%',
-                            height: 60,
-                            paddingTop: 20,
-                            textAlign: 'center',
-                          }}
-                        >
-                          <div
-                            style={{
-                              textTransform: 'uppercase',
-                              fontWeight: 600,
-                            }}
-                          >
-                            <FileOutlined />
-                          </div>
-                        </div>
-                      )}
-                      {collapsed ? (
-                        <Typography.Text type="secondary">
-                          {file.type.split('/')[1].toUpperCase()}{' '}
-                          {getReadableFileSizeString(file.size)}
-                        </Typography.Text>
-                      ) : (
-                        <div>
-                          <div>
-                            <Typography.Text strong>
-                              {file.name}
-                            </Typography.Text>
-                          </div>
-                          <div>
-                            <Row>
-                              <Col flex={1}>
-                                <Typography.Text type="secondary">
-                                  {file.type.split('/')[1].toUpperCase()}{' '}
-                                  {file.type.split('/')[0].toLowerCase()} -{' '}
-                                  {getReadableFileSizeString(file.size)}
-                                </Typography.Text>
-                              </Col>
-                              <Col>
-                                <a href={file.previewURL} target="_blank">
-                                  Download
-                                </a>
-                              </Col>
-                            </Row>
-                          </div>
-                        </div>
-                      )}
-
-                      <Divider
-                        style={{
-                          marginTop: collapsed ? 8 : 16,
-                          marginBottom: collapsed ? 8 : 16,
-                        }}
-                      />
-                    </div>
-                  );
-                })}
-              </Space>
-            </div>
-          </Sider>
-        )}
+          <Row justify="center">
+            <Col style={{ width: 500 }}>
+              <Card>
+                <Typography.Text size="large">
+                  CHAPTER
+                  <br />
+                  ONE
+                </Typography.Text>
+                <br />
+                <Typography.Title
+                  level={5}
+                  style={{ fontFamily: "'Piedra', cursive" }}
+                >
+                  Melbourne, 20 October 2019
+                </Typography.Title>
+                <Typography.Paragraph>
+                  Chau and I really liked each other at the time. Even though I
+                  already planned to go back Vietnam in middle January 2020 (in
+                  one and a half month) for Lunar New Year, I couldn’t wait
+                  anymore. So I took one week off work and traveled to Vietnam
+                  to be with Chau.
+                </Typography.Paragraph>
+                <Typography.Paragraph>
+                  I searched for the earliest flight available. It was Thursday
+                  night when I booked my flight to Hanoi, and it departed
+                  mid-night the next day (1am Saturday 23/11). The decision was
+                  made somewhat quick, but I’m so glad I did that.
+                </Typography.Paragraph>
+              </Card>
+            </Col>
+          </Row>
+          <br />
+          <Row justify="center">
+            <Col style={{ width: 500 }}>
+              <Card>
+                <Typography.Text size="large">
+                  CHAPTER
+                  <br />
+                  TWO
+                </Typography.Text>
+                <br />
+                <Typography.Title
+                  level={5}
+                  style={{ fontFamily: "'Piedra', cursive" }}
+                >
+                  Hanoi, 23 November 2019
+                </Typography.Title>
+                <Typography.Paragraph>
+                  As soon as I arrived Hanoi, I picked up the rental car, then
+                  went to pick Chau up at her home. In the whole next 9 days 8
+                  nights, we never leave each other’s sight.
+                </Typography.Paragraph>
+                <Typography.Paragraph>
+                  We stayed in Hanoi that night, so I could take some rest, and
+                  we had some time to get know each other more. Chau was a bit
+                  shy at first, after all, it was the first time we met in
+                  person. But it didn’t take long, we had so much things in
+                  common. It felt like we already knew each other for so long
+                  and we were born to love and be loved by each other.
+                </Typography.Paragraph>
+              </Card>
+            </Col>
+          </Row>
+        </Content>
+        <Footer
+          style={{
+            textAlign: 'center',
+            padding: '12px 50px',
+            background: '#001529',
+            color: 'white',
+          }}
+        >
+          Story © 2020 Created by Quan Do
+        </Footer>
       </Layout>
     </div>
   );

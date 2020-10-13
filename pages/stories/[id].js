@@ -11,6 +11,7 @@ import {
 import {
   Descriptions,
   Breadcrumb,
+  Tabs,
   Statistic,
   Dropdown,
   Menu,
@@ -194,47 +195,51 @@ const Story = (props) => {
                   </div>
                 )}
               </Affix>
-              <div
-                style={screens.md ? { width: 700, margin: '0 auto 24px' } : {}}
-              >
-                <Space size="large" direction="vertical">
-                  {!editing ? (
-                    <Descriptions column={1}>
-                      {data.description && (
-                        <Typography.Paragraph
-                          ellipsis={{
-                            rows: 3,
-                            expandable: true,
-                            symbol: 'more',
-                          }}
-                        >
-                          {data.description}
-                        </Typography.Paragraph>
-                      )}
-                      {data.lastModifiedBy && (
-                        <Descriptions.Item label="Last modified">
-                          <Space>
-                            <User user={data.lastModifiedBy} />
-                            <Typography.Text type="secondary">
-                              {FIRESTORE_HELPER.timestampToFromNow(
-                                data.lastModified,
-                              )}
-                            </Typography.Text>
-                          </Space>
-                        </Descriptions.Item>
-                      )}
-                    </Descriptions>
-                  ) : (
-                    <EditStory
-                      id={props.id}
-                      data={data}
-                      onFinish={() => setEditing(false)}
-                    />
-                  )}
+              {false && (
+                <div
+                  style={
+                    screens.md ? { width: 700, margin: '0 auto 24px' } : {}
+                  }
+                >
+                  <Space size="large" direction="vertical">
+                    {!editing ? (
+                      <Descriptions column={1}>
+                        {data.description && (
+                          <Typography.Paragraph
+                            ellipsis={{
+                              rows: 3,
+                              expandable: true,
+                              symbol: 'more',
+                            }}
+                          >
+                            {data.description}
+                          </Typography.Paragraph>
+                        )}
+                        {data.lastModifiedBy && (
+                          <Descriptions.Item label="Last modified">
+                            <Space>
+                              <User user={data.lastModifiedBy} />
+                              <Typography.Text type="secondary">
+                                {FIRESTORE_HELPER.timestampToFromNow(
+                                  data.lastModified,
+                                )}
+                              </Typography.Text>
+                            </Space>
+                          </Descriptions.Item>
+                        )}
+                      </Descriptions>
+                    ) : (
+                      <EditStory
+                        id={props.id}
+                        data={data}
+                        onFinish={() => setEditing(false)}
+                      />
+                    )}
 
-                  <People storyId={props.id} />
-                </Space>
-              </div>
+                    <People storyId={props.id} />
+                  </Space>
+                </div>
+              )}
 
               <Row style={{ background: 'white', flexWrap: 'nowrap' }}>
                 <Col flex="300px" style={{ padding: 16 }}>
@@ -277,30 +282,49 @@ const Story = (props) => {
                   <Card title="Milestones">
                     <Space size="large" direction="vertical">
                       <div>
-                        <Statistic title="First meeting" value="20.10.2019" />
+                        <Statistic
+                          title="First meeting"
+                          value="20 - 10 - 2019"
+                        />
                         <Typography.Text>For 11 months 23 days</Typography.Text>
                       </div>
                       <div>
-                        <Statistic title="Being in love" value="10.12.2019" />
+                        <Statistic
+                          title="Being in love"
+                          value="10 - 12 - 2019"
+                        />
                         <Typography.Text>For 10 months 3 days</Typography.Text>
                       </div>
                       <div>
-                        <Statistic title="Engagement" value="11.02.2020" />
+                        <Statistic title="Engagement" value="11 - 02 - 2020" />
                         <Typography.Text>For 8 months 2 days</Typography.Text>
                       </div>
                       <div>
-                        <Statistic title="Wedding" value="24.12.2020" />
+                        <Statistic title="Wedding" value="24 - 12 - 2020" />
                         <Typography.Text>In 3 months</Typography.Text>
                       </div>
                     </Space>
                   </Card>
                 </Col>
                 <Col flex="auto">
-                  <Items
-                    storyName={data.name}
-                    storyId={props.id}
-                    setActiveItem={setActiveItem}
-                  />
+                  <Row style={{ background: 'white', flexWrap: 'nowrap' }}>
+                    <Col flex="auto">
+                      <Tabs onChange={console.log}>
+                        <Tabs.TabPane tab="Timeline" key="1">
+                          <Items
+                            storyName={data.name}
+                            storyId={props.id}
+                            setActiveItem={setActiveItem}
+                          />
+                        </Tabs.TabPane>
+                        <Tabs.TabPane tab="Financial" key="2"></Tabs.TabPane>
+                        <Tabs.TabPane tab="Household" key="3"></Tabs.TabPane>
+                        <Tabs.TabPane tab="Social" key="4"></Tabs.TabPane>
+                        <Tabs.TabPane tab="Commitment" key="5"></Tabs.TabPane>
+                        <Tabs.TabPane tab="Testify" key="6"></Tabs.TabPane>
+                      </Tabs>
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
             </div>

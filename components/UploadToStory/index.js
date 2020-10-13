@@ -113,64 +113,63 @@ const UploadToStory = () => {
   return (
     <Row style={{ flexWrap: 'nowrap' }}>
       <Col flex="auto">
-        <Card>
-          <Form
-            name="uploadAll"
-            onFinish={onFinish}
-            // initialValues={{
-            //   ['input-number']: 3,
-            //   ['checkbox-group']: ['A', 'B'],
-            //   rate: 3.5,
-            // }}
-          >
-            {!Object.keys(dates).length ? (
-              <Empty
-                image={Empty.PRESENTED_IMAGE_SIMPLE}
-                description={
-                  <span>
-                    <Typography.Text type="secondary">No Data</Typography.Text>
-                    <br />
-                    <br />
-                    {uploadButton}
-                  </span>
-                }
-              />
-            ) : (
-              <div style={screens.md ? { width: 700, margin: '0 auto' } : {}}>
-                <Row justify="space-between">
-                  <Col>
-                    <Space>
-                      {uploadButton}
-                      <Button
-                        danger
-                        onClick={() => {
-                          setDates([]);
-                          setAnchors([]);
-                        }}
-                      >
-                        Delete all
-                      </Button>
-                    </Space>
-                  </Col>
-                  <Col>
-                    <Space>
-                      <Button type="primary" htmlType="submit">
-                        Add to Story
-                      </Button>
-                    </Space>
-                  </Col>
-                </Row>
-              </div>
-            )}
-            <br />
-            <br />
+        <Form
+          name="uploadAll"
+          onFinish={onFinish}
+          // initialValues={{
+          //   ['input-number']: 3,
+          //   ['checkbox-group']: ['A', 'B'],
+          //   rate: 3.5,
+          // }}
+        >
+          {!Object.keys(dates).length ? (
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={
+                <span>
+                  <Typography.Text type="secondary">No Data</Typography.Text>
+                  <br />
+                  <br />
+                  {uploadButton}
+                </span>
+              }
+            />
+          ) : (
+            <Row justify="space-between">
+              <Col>
+                <Space>
+                  {uploadButton}
+                  <Button
+                    danger
+                    onClick={() => {
+                      setDates([]);
+                      setAnchors([]);
+                    }}
+                  >
+                    Delete all
+                  </Button>
+                </Space>
+              </Col>
+              <Col>
+                <Space>
+                  <Button type="primary" htmlType="submit">
+                    Add to Story
+                  </Button>
+                </Space>
+              </Col>
+            </Row>
+          )}
+          <br />
+          <br />
+
+          <Card>
             {Object.keys(dates).map((key) => {
               return (
                 <div key={key}>
                   <Divider />
                   <div id={key}>
                     <Typography.Text type="secondary">
-                      {moment(key, 'YYYYMMDD').format('ddd D MMM, YYYY')}
+                      {moment(key, 'YYYYMMDD').format('dddd, DD MMMM YYYY')}
                     </Typography.Text>
                   </div>
 
@@ -277,10 +276,10 @@ const UploadToStory = () => {
                 </div>
               );
             })}
-            <br />
-            <br />
-          </Form>
-        </Card>
+          </Card>
+          <br />
+          <br />
+        </Form>
       </Col>
       <Col flex="300px" style={{ padding: 16 }}>
         <Anchor offsetTop={60} activeLink={`#${anchors[0]}`}>
@@ -292,7 +291,7 @@ const UploadToStory = () => {
                 title={
                   <Row>
                     <Col flex="auto">
-                      {moment(key, 'YYYYMMDD').format('ddd D MMM, YYYY')}
+                      {moment(key, 'YYYYMMDD').format('DD - MM - YYYY')}
                     </Col>
                     <Col>{dates[key].length}</Col>
                   </Row>
