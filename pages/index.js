@@ -27,6 +27,7 @@ import Head from 'next/head';
 
 import Link from 'next/link';
 import { useState } from 'react';
+import Chapters from '../components/Chapters';
 import PageFooter from '../components/PageFooter';
 import PageHeader from '../components/PageHeader';
 import Stories from '../components/Stories';
@@ -68,6 +69,10 @@ const Index = () => {
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Piedra&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"
           rel="stylesheet"
         />
       </Head>
@@ -243,18 +248,25 @@ const Index = () => {
           <Row justify="center">
             <Col style={{ width: 500 }}>
               <Card>
-                <Typography.Text size="large">
+                <Typography.Text
+                  size={32}
+                  style={{ fontFamily: "'Dancing Script', cursive" }}
+                >
                   CHAPTER
                   <br />
                   ONE
                 </Typography.Text>
                 <br />
                 <Typography.Title
-                  level={5}
+                  level={4}
                   style={{ fontFamily: "'Piedra', cursive" }}
                 >
-                  Melbourne, 20 October 2019
+                  Our story begins
                 </Typography.Title>
+                <br />
+                <Typography.Text strong>
+                  Melbourne, 20 October 2019
+                </Typography.Text>
                 <Typography.Paragraph>
                   Chau and I really liked each other at the time. Even though I
                   already planned to go back Vietnam in middle January 2020 (in
@@ -275,18 +287,24 @@ const Index = () => {
           <Row justify="center">
             <Col style={{ width: 500 }}>
               <Card>
-                <Typography.Text size="large">
+                <Typography.Text
+                  style={{ fontFamily: "'Dancing Script', cursive" }}
+                >
                   CHAPTER
                   <br />
                   TWO
                 </Typography.Text>
                 <br />
                 <Typography.Title
-                  level={5}
+                  level={4}
                   style={{ fontFamily: "'Piedra', cursive" }}
                 >
-                  Hanoi, 23 November 2019
+                  We met for the first time
                 </Typography.Title>
+                <br />
+                <Typography.Text strong>
+                  Hanoi, 23 November 2019
+                </Typography.Text>
                 <Typography.Paragraph>
                   As soon as I arrived Hanoi, I picked up the rental car, then
                   went to pick Chau up at her home. In the whole next 9 days 8
