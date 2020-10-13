@@ -116,9 +116,10 @@ const Index = () => {
               >
                 Applicant
               </Typography.Title>
-              <Avatar size={150} src="photos/juliet.jpg" />
-              <Typography.Title
-                level={5}
+              <Avatar size={screens.md ? 150 : 100} src="photos/juliet.jpg" />
+              <br />
+              <Typography.Text
+                strong
                 style={{
                   marginTop: 8,
                   marginBottom: 4,
@@ -126,16 +127,20 @@ const Index = () => {
                 }}
               >
                 Chau Thi Quynh Nguyen
-              </Typography.Title>
-              <Typography.Text>Birthday: 20 - 09 - 1999</Typography.Text>
-              <br />
-              <Typography.Text type="secondary">
-                Nickname: Juliet
               </Typography.Text>
+              <br />
+              <Typography.Text>20 - 09 - 1999</Typography.Text>
+              <br />
+              <Typography.Text type="secondary">@Juliet</Typography.Text>
             </Col>
-            <Col flex="128px">
+            <Col>
               <HeartFilled
-                style={{ fontSize: 24, color: 'red', marginTop: 85 }}
+                style={{
+                  fontSize: 24,
+                  color: 'red',
+                  marginTop: 85,
+                  padding: 8,
+                }}
               />
             </Col>
             <Col>
@@ -145,9 +150,10 @@ const Index = () => {
               >
                 Sponsor
               </Typography.Title>
-              <Avatar size={150} src="photos/jayc.jpg" />
-              <Typography.Title
-                level={5}
+              <Avatar size={screens.md ? 150 : 100} src="photos/jayc.jpg" />
+              <br />
+              <Typography.Text
+                strong
                 style={{
                   marginTop: 8,
                   marginBottom: 4,
@@ -155,7 +161,8 @@ const Index = () => {
                 }}
               >
                 Quan Do Hong
-              </Typography.Title>
+              </Typography.Text>
+              <br />
               <Typography.Text>Birthday: 05 - 10 - 1991</Typography.Text>
               <br />
               <Typography.Text type="secondary">Nickname: Jayc</Typography.Text>
@@ -200,24 +207,27 @@ const Index = () => {
             background: '#f6f8fa',
             minHeight: '80vh',
             position: 'relative',
+            paddingBottom: 64,
           }}
         >
-          <div style={{ position: 'absolute', top: 16, right: 16 }}>
-            <Anchor style={{ background: 'unset' }}>
-              <Anchor.Link
-                href="#components-anchor-demo-basic"
-                title="Basic demo"
-              />
-              <Anchor.Link
-                href="#components-anchor-demo-static"
-                title="Static demo"
-              />
-              <Anchor.Link href="#API" title="API">
-                <Anchor.Link href="#Anchor-Props" title="Anchor Props" />
-                <Anchor.Link href="#Link-Props" title="Link Props" />
-              </Anchor.Link>
-            </Anchor>
-          </div>
+          {screens.md && (
+            <div style={{ position: 'absolute', top: 16, right: 16 }}>
+              <Anchor style={{ background: 'unset' }}>
+                <Anchor.Link
+                  href="#components-anchor-demo-basic"
+                  title="Basic demo"
+                />
+                <Anchor.Link
+                  href="#components-anchor-demo-static"
+                  title="Static demo"
+                />
+                <Anchor.Link href="#API" title="API">
+                  <Anchor.Link href="#Anchor-Props" title="Anchor Props" />
+                  <Anchor.Link href="#Link-Props" title="Link Props" />
+                </Anchor.Link>
+              </Anchor>
+            </div>
+          )}
           <br />
           <Row justify="center">
             <Col style={{ maxWidth: 500 }}>
@@ -294,6 +304,8 @@ const Index = () => {
               </Card>
             </Col>
           </Row>
+          <br />
+          <Card>To be continued..</Card>
         </Content>
         <Footer
           style={{
