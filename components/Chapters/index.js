@@ -66,6 +66,7 @@ const Chapters = () => {
       content,
       createdAt: now,
       id: now,
+      files: [],
     };
 
     return STORIES.setChapter(
