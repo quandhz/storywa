@@ -11,6 +11,7 @@ import {
 import {
   Descriptions,
   Breadcrumb,
+  Statistic,
   Dropdown,
   Menu,
   Modal,
@@ -26,6 +27,7 @@ import {
   BackTop,
   Anchor,
   Affix,
+  Avatar,
 } from 'antd';
 import moment from 'moment';
 import Head from 'next/head';
@@ -43,6 +45,7 @@ import Items from '../../components/Items';
 import AllStories from '../../components/Story/AllStories';
 import AddStory from '../../components/Story/AddStory';
 import styles from '../../components/Content/styles.module.css';
+import { useUser } from '../../utils/auth/useUser';
 
 const { Header, Content, Footer } = Layout;
 
@@ -55,6 +58,7 @@ const Story = (props) => {
   const [adding, setAdding] = useState(false);
   const router = useRouter();
   const [targetOffset, setTargetOffset] = useState(0);
+  const { user, logout } = useUser();
 
   useEffect(() => {
     return STORIES.stream(props.id, (snapshot) => {
@@ -191,7 +195,7 @@ const Story = (props) => {
                 )}
               </Affix>
               <div
-                style={screens.md ? { width: 700, margin: '0 auto 400px' } : {}}
+                style={screens.md ? { width: 700, margin: '0 auto 24px' } : {}}
               >
                 <Space size="large" direction="vertical">
                   {!editing ? (
@@ -229,14 +233,76 @@ const Story = (props) => {
                   )}
 
                   <People storyId={props.id} />
+                </Space>
+              </div>
 
+              <Row style={{ background: 'white', flexWrap: 'nowrap' }}>
+                <Col flex="300px" style={{ padding: 16 }}>
+                  <Affix offsetTop={60}>
+                    <Card title="People">
+                      <Space direction="vertical">
+                        <Space align="center">
+                          <Avatar size={32} src={user.photoURL} />
+                          <div>
+                            <Space size={0} direction="vertical">
+                              <Typography.Text strong>
+                                Quan Hong Do
+                              </Typography.Text>
+                              <Typography.Text type="secondary">
+                                Sponsor
+                              </Typography.Text>
+                            </Space>
+                          </div>
+                        </Space>
+                        <Space align="center">
+                          <Avatar
+                            size={32}
+                            src="https://lh3.googleusercontent.com/-986Ac9cmE2g/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclV9DHb2Zfv8Px7QHMsmvrbE2XFGQ/s96-c/photo.jpg"
+                          />
+                          <div>
+                            <Space size={0} direction="vertical">
+                              <Typography.Text strong>
+                                Chau Thi Quynh Nguyen
+                              </Typography.Text>
+                              <Typography.Text type="secondary">
+                                Applicant
+                              </Typography.Text>
+                            </Space>
+                          </div>
+                        </Space>
+                      </Space>
+                    </Card>
+                  </Affix>
+                  <br />
+                  <Card title="Milestones">
+                    <Space size="large" direction="vertical">
+                      <div>
+                        <Statistic title="First meeting" value="20.10.2019" />
+                        <Typography.Text>For 11 months 23 days</Typography.Text>
+                      </div>
+                      <div>
+                        <Statistic title="Being in love" value="10.12.2019" />
+                        <Typography.Text>For 10 months 3 days</Typography.Text>
+                      </div>
+                      <div>
+                        <Statistic title="Engagement" value="11.02.2020" />
+                        <Typography.Text>For 8 months 2 days</Typography.Text>
+                      </div>
+                      <div>
+                        <Statistic title="Wedding" value="24.12.2020" />
+                        <Typography.Text>In 3 months</Typography.Text>
+                      </div>
+                    </Space>
+                  </Card>
+                </Col>
+                <Col flex="auto">
                   <Items
                     storyName={data.name}
                     storyId={props.id}
                     setActiveItem={setActiveItem}
                   />
-                </Space>
-              </div>
+                </Col>
+              </Row>
             </div>
           ) : (
             <div style={screens.md ? { width: 700, margin: '0 auto' } : {}}>
